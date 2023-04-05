@@ -4,6 +4,14 @@ return {
   { "tpope/vim-eunuch", },
   { "tpope/vim-repeat", },
   { "tpope/vim-surround" },
+  { "tribela/vim-transparent" },
+
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+    version = "*"
+  },
 
   {
     "nvim-tree/nvim-web-devicons",

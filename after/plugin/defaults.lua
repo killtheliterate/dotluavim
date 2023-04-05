@@ -91,4 +91,8 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
+-- neogen
+vim.keymap.set('n', '<leader>nf', ":Neogen func<CR>",
+  { noremap = true, desc = '[D]ocument [F]unction' })
+
 -- vim: ts=2 sts=2 sw=2 et
