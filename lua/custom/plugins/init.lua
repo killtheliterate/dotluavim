@@ -1,5 +1,5 @@
 return {
-  { "github/copilot.vim", },
+  -- { "github/copilot.vim", },
   { "myusuf3/numbers.vim", },
   { "tpope/vim-eunuch", },
   { "tpope/vim-repeat", },
