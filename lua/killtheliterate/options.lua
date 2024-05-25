@@ -16,4 +16,8 @@ set.writebackup = false
 vim.o.inccommand = 'nosplit'
 vim.o.completeopt = 'menuone,noselect'
 
+vim.g.markdown_fenced_languages = {
+  'ts=typescript',
+}
+
 -- vim: ts=2 sts=2 sw=2 et

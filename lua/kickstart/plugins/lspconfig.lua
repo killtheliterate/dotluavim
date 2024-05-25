@@ -207,6 +207,7 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      local lspconfig = require 'lspconfig'
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -215,30 +216,12 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            lspconfig[server_name].setup(server)
           end,
 
           ['denols'] = function()
-            local lspconfig = require 'lspconfig'
-
-            local function is_deno_project(root_dir)
-              -- Check for a deno specific file or directory (e.g., deno.json, deno.lock)
-              local deno_files = { 'deno.json', 'deno.lock' }
-              for _, file in ipairs(deno_files) do
-                if lspconfig.util.path.exists(lspconfig.util.path.join(root_dir, file)) then
-                  return true
-                end
-              end
-              return false
-            end
-
             lspconfig.denols.setup {
-              root_dir = function(fname)
-                local root = lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
-                if is_deno_project(root) then
-                  return root
-                end
-              end,
+              root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
 
               init_options = {
                 lint = true,
@@ -248,34 +231,13 @@ return {
           end,
 
           ['tsserver'] = function()
-            local lspconfig = require 'lspconfig'
-
-            local function is_node_project(root_dir)
-              -- Check for a node specific file or directory (e.g., package.json)
-              local node_files = { 'package.json' }
-              for _, file in ipairs(node_files) do
-                if lspconfig.util.path.exists(lspconfig.util.path.join(root_dir, file)) then
-                  return true
-                end
-              end
-              return false
-            end
-
             lspconfig.tsserver.setup {
-              root_dir = function(fname)
-                local root = lspconfig.util.find_git_ancestor(fname) or lspconfig.util.path.dirname(fname)
-                if is_node_project(root) then
-                  return root
-                end
-              end,
-
+              root_dir = lspconfig.util.root_pattern 'package.json',
               single_file_support = false,
             }
           end,
 
           ['eslint'] = function()
-            local lspconfig = require 'lspconfig'
-
             lspconfig.eslint.setup {
               root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
 
