@@ -54,10 +54,17 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
 
   require 'killtheliterate.plugins.base16',
+  require 'killtheliterate.plugins.copilot',
   require 'killtheliterate.plugins.dirvish',
   require 'killtheliterate.plugins.indent_line',
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.trouble',
+
+  'myusuf3/numbers.vim',
+  'tpope/vim-eunuch',
+  'tpope/vim-repeat',
+  -- "tpope/vim-surround",
+  'tribela/vim-transparent',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
