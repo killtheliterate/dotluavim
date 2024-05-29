@@ -9,7 +9,7 @@ require('lazy').setup({
   require 'kickstart/plugins/cmp',
   -- require 'kickstart/plugins/tokyonight',
   require 'kickstart/plugins/todo-comments',
-  require 'kickstart/plugins/mini',
+  -- require 'kickstart/plugins/mini',
   require 'kickstart/plugins/treesitter',
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.lint',
@@ -21,6 +21,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.dirvish',
   require 'killtheliterate.plugins.indent_line',
   require 'killtheliterate.plugins.lspconfig',
+  require 'killtheliterate.plugins.mini',
   require 'killtheliterate.plugins.null_ls',
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.trouble',
@@ -28,7 +29,7 @@ require('lazy').setup({
   'myusuf3/numbers.vim',
   'tpope/vim-eunuch',
   'tpope/vim-repeat',
-  -- "tpope/vim-surround",
+  'tpope/vim-surround',
   'tribela/vim-transparent',
 }, {
   ui = {
