@@ -21,6 +21,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.dirvish',
   require 'killtheliterate.plugins.indent_line',
   require 'killtheliterate.plugins.lspconfig',
+  require 'killtheliterate.plugins.null_ls',
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.trouble',
 

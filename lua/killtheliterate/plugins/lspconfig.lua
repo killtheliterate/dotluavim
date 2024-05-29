@@ -71,7 +71,6 @@ return {
         bashls = {},
         denols = {},
         elixirls = {},
-        eslint = {},
         html = {},
         jsonls = {},
         pyright = {},
