@@ -3,7 +3,7 @@ require('lazy').setup({
   { 'numToStr/Comment.nvim', opts = {} },
   require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/which-key',
-  require 'kickstart/plugins/telescope',
+  -- require 'kickstart/plugins/telescope',
   -- require 'kickstart/plugins/lspconfig',
   require 'kickstart/plugins/conform',
   require 'kickstart/plugins/cmp',
@@ -17,6 +17,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.neo-tree',
 
   require 'killtheliterate.plugins.base16',
+  require 'killtheliterate.plugins.cmp',
   require 'killtheliterate.plugins.copilot',
   require 'killtheliterate.plugins.dirvish',
   require 'killtheliterate.plugins.indent_line',
@@ -24,6 +25,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.mini',
   require 'killtheliterate.plugins.null_ls',
   require 'killtheliterate.plugins.reveal',
+  require 'killtheliterate.plugins.telescope',
   require 'killtheliterate.plugins.trouble',
 
   'myusuf3/numbers.vim',
