@@ -134,6 +134,10 @@ return {
               },
 
               -- @TODO: overrides do not work
+              -- @see: https://www.reddit.com/r/neovim/comments/15vxpss/specific_configuration_for_a_language_server
+              -- @see: https://www.reddit.com/r/neovim/comments/1agwrqa/how_to_extend_masons_automatic_server
+              -- @see: https://www.reddit.com/r/neovim/comments/1co6g92/how_to_connect_csharpls_extended_in_lazy
+              -- @see: https://www.reddit.com/r/neovim/comments/1b75th3/comment/ktgns2i
               handlers = {
                 ['textDocument/definition'] = function(err, result, ctx, config)
                   if result and vim.islist(result) and #result > 1 then
