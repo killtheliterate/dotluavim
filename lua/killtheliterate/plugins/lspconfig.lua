@@ -9,8 +9,11 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       { 'folke/neodev.nvim', opts = {} },
+      'yioneko/nvim-vtsls',
     },
     config = function()
+      vim.lsp.set_log_level 'debug'
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('killtheliterate-lsp-attach', { clear = true }),
         callback = function(event)
@@ -74,7 +77,20 @@ return {
         rust_analyzer = {},
         svelte = {},
         -- tsserver = {},
-        vtsls = {},
+        vtsls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                parameterNames = { enabled = 'literals' },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+            },
+          },
+        },
 
         lua_ls = {
           settings = {
@@ -123,6 +139,14 @@ return {
           ['vtsls'] = function()
             local original_handler = vim.lsp.handlers['textDocument/definition']
 
+            local first_definition_handler = function(err, result, ctx, config)
+              if result and vim.islist(result) and #result > 1 then
+                original_handler(err, { result[1] }, ctx, config)
+              else
+                original_handler(err, result, ctx, config)
+              end
+            end
+
             lspconfig.vtsls.setup {
               root_dir = lspconfig.util.root_pattern 'package.json',
 
@@ -134,48 +158,34 @@ return {
                 },
               },
 
+              on_attach = function(_client, buffer)
+                vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = buffer, desc = 'vtsls: [C]ode [L]ens' })
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = buffer, desc = 'vtsls: [G]oto [D]efinition' })
+                vim.keymap.set('n', 'gs', require('vtsls').commands.goto_source_definition, { buffer = buffer, desc = 'vtsls: [G]oto [S]ources' })
+
+                vim.lsp.commands['editor.action.showReferences'] = function(command, ctx)
+                  local locations = command.arguments[3]
+                  local client = vim.lsp.get_client_by_id(ctx.client_id)
+
+                  if locations and #locations > 0 then
+                    local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
+                    vim.fn.setloclist(0, {}, ' ', { title = 'References', items = items, context = ctx })
+                    vim.api.nvim_command 'lopen'
+                  end
+                end
+              end,
+
               -- @TODO: overrides do not work
               -- @see: https://www.reddit.com/r/neovim/comments/15vxpss/specific_configuration_for_a_language_server
               -- @see: https://www.reddit.com/r/neovim/comments/1agwrqa/how_to_extend_masons_automatic_server
               -- @see: https://www.reddit.com/r/neovim/comments/1co6g92/how_to_connect_csharpls_extended_in_lazy
               -- @see: https://www.reddit.com/r/neovim/comments/1b75th3/comment/ktgns2i
+              -- @see: https://github.com/typescript-language-server/typescript-language-server/issues/216
               handlers = {
-                ['textDocument/definition'] = function(err, result, ctx, config)
-                  if result and vim.islist(result) and #result > 1 then
-                    original_handler(err, { result[1] }, ctx, config)
-                  else
-                    original_handler(err, result, ctx, config)
-                  end
-                end,
+                ['textDocument/definition'] = first_definition_handler,
               },
             }
           end,
-
-          -- ['tsserver'] = function()
-          --   local original_handler = vim.lsp.handlers['textDocument/definition']
-          --
-          --   lspconfig.tsserver.setup {
-          --     root_dir = lspconfig.util.root_pattern 'package.json',
-          --
-          --     single_file_support = false,
-          --
-          --     init_options = {
-          --       tsserver = {
-          --         addMissingImports = true,
-          --       },
-          --     },
-          --
-          --     handlers = {
-          --       ['textDocument/definition'] = function(err, result, ctx, config)
-          --         if result and vim.islist(result) and #result > 1 then
-          --           original_handler(err, { result[1] }, ctx, config)
-          --         else
-          --           original_handler(err, result, ctx, config)
-          --         end
-          --       end,
-          --     },
-          --   }
-          -- end,
         },
       }
     end,
