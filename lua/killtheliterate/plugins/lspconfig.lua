@@ -33,6 +33,25 @@ return {
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if client and client.name == 'vtsls' then
+            vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = event.buf, desc = 'vtsls: [C]ode [L]ens' })
+            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = event.buf, desc = 'vtsls: [G]oto [D]efinition' })
+            vim.keymap.set('n', 'gs', require('vtsls').commands.goto_source_definition, { buffer = event.buf, desc = 'vtsls: [G]oto [S]ources' })
+
+            vim.lsp.commands['editor.action.showReferences'] = function(command, ctx)
+              local locations = command.arguments[3]
+
+              if locations and #locations > 0 then
+                local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
+                vim.fn.setloclist(0, {}, ' ', { title = 'References', items = items, context = ctx })
+                vim.api.nvim_command 'lopen'
+              end
+            end
+          else
+            map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          end
+
           if client and client.server_capabilities.documentHighlightProvider then
             local highlight_augroup = vim.api.nvim_create_augroup('killtheliterate-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -157,23 +176,6 @@ return {
                   addMissingImports = true,
                 },
               },
-
-              on_attach = function(_client, buffer)
-                vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = buffer, desc = 'vtsls: [C]ode [L]ens' })
-                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = buffer, desc = 'vtsls: [G]oto [D]efinition' })
-                vim.keymap.set('n', 'gs', require('vtsls').commands.goto_source_definition, { buffer = buffer, desc = 'vtsls: [G]oto [S]ources' })
-
-                vim.lsp.commands['editor.action.showReferences'] = function(command, ctx)
-                  local locations = command.arguments[3]
-                  local client = vim.lsp.get_client_by_id(ctx.client_id)
-
-                  if locations and #locations > 0 then
-                    local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
-                    vim.fn.setloclist(0, {}, ' ', { title = 'References', items = items, context = ctx })
-                    vim.api.nvim_command 'lopen'
-                  end
-                end
-              end,
 
               -- @TODO: overrides do not work
               -- @see: https://www.reddit.com/r/neovim/comments/15vxpss/specific_configuration_for_a_language_server
