@@ -90,6 +90,7 @@ return {
         bashls = {},
         denols = {},
         elixirls = {},
+        eslint = {},
         html = {},
         jsonls = {},
         pyright = {},
@@ -185,6 +186,22 @@ return {
               -- @see: https://github.com/typescript-language-server/typescript-language-server/issues/216
               handlers = {
                 ['textDocument/definition'] = first_definition_handler,
+              },
+            }
+          end,
+
+          ['eslint'] = function()
+            lspconfig.eslint.setup {
+              root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
+
+              settings = {
+                format = { enable = true },
+              },
+
+              handlers = {
+                ['window/showMessageRequest'] = function(_, result)
+                  return result.message:match 'ENOENT' and vim.NIL or result
+                end,
               },
             }
           end,
