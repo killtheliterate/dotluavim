@@ -21,7 +21,8 @@ return {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+          map('gD', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinitions')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -30,13 +31,12 @@ return {
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          -- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
           if client and client.name == 'vtsls' then
             vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = event.buf, desc = 'vtsls: [C]ode [L]ens' })
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = event.buf, desc = 'vtsls: [G]oto [D]efinition' })
             vim.keymap.set('n', 'gs', require('vtsls').commands.goto_source_definition, { buffer = event.buf, desc = 'vtsls: [G]oto [S]ources' })
 
             vim.lsp.commands['editor.action.showReferences'] = function(command, ctx)
@@ -48,8 +48,6 @@ return {
                 vim.api.nvim_command 'lopen'
               end
             end
-          else
-            map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           end
 
           if client and client.server_capabilities.documentHighlightProvider then
@@ -195,7 +193,7 @@ return {
               root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
 
               settings = {
-                format = { enable = true },
+                format = false,
               },
 
               handlers = {
