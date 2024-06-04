@@ -88,13 +88,13 @@ return {
         bashls = {},
         denols = {},
         elixirls = {},
-        eslint = {},
+        -- @TODO: eslint-lsp is sloooooooow
+        -- eslint = {},
         html = {},
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
         svelte = {},
-        -- tsserver = {},
         vtsls = {
           settings = {
             typescript = {
@@ -127,6 +127,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'codespell',
+        'eslint_d',
         'prettierd',
         'stylua',
       })
@@ -188,21 +189,21 @@ return {
             }
           end,
 
-          ['eslint'] = function()
-            lspconfig.eslint.setup {
-              root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
-
-              settings = {
-                format = false,
-              },
-
-              handlers = {
-                ['window/showMessageRequest'] = function(_, result)
-                  return result.message:match 'ENOENT' and vim.NIL or result
-                end,
-              },
-            }
-          end,
+          -- ['eslint'] = function()
+          --   lspconfig.eslint.setup {
+          --     root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
+          --
+          --     settings = {
+          --       format = false,
+          --     },
+          --
+          --     handlers = {
+          --       ['window/showMessageRequest'] = function(_, result)
+          --         return result.message:match 'ENOENT' and vim.NIL or result
+          --       end,
+          --     },
+          --   }
+          -- end,
         },
       }
     end,

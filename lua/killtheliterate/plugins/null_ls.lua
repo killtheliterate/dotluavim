@@ -10,9 +10,12 @@ return {
     null_ls.setup {
       sources = {
         null_ls.builtins.diagnostics.codespell,
-        -- require('none-ls.diagnostics.eslint_d').with {
-        --   method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-        -- },
+        require('none-ls.diagnostics.eslint_d').with {
+          method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+          condition = function(utils)
+            return utils.root_has_file { 'package.json' }
+          end,
+        },
         null_ls.builtins.diagnostics.stylelint.with {
           filetypes = { 'scss', 'css' },
         },

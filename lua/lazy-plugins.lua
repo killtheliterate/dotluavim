@@ -20,6 +20,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.cmp',
   require 'killtheliterate.plugins.copilot',
   require 'killtheliterate.plugins.dirvish',
+  require 'killtheliterate.plugins.flash',
   require 'killtheliterate.plugins.indent_line',
   require 'killtheliterate.plugins.lspconfig',
   require 'killtheliterate.plugins.mini',
