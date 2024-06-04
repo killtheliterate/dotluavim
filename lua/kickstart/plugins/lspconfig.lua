@@ -156,22 +156,18 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        -- clangd = {},
+        -- gopls = {},
+        -- pyright = {},
+        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        bashls = {},
-        denols = {},
-        elixirls = {},
-        eslint = {},
-        html = {},
-        jsonls = {},
-        pyright = {},
-        rust_analyzer = {},
-        svelte = {},
-        tsserver = {},
+        -- tsserver = {},
+        --
 
         lua_ls = {
           -- cmd = {...},
@@ -183,7 +179,7 @@ return {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              diagnostics = { disable = { 'missing-fields' } },
+              -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -201,13 +197,10 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'codespell',
-        'prettierd',
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      local lspconfig = require 'lspconfig'
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -216,41 +209,7 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            lspconfig[server_name].setup(server)
-          end,
-
-          ['denols'] = function()
-            lspconfig.denols.setup {
-              root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
-
-              init_options = {
-                lint = true,
-                unstable = false,
-              },
-            }
-          end,
-
-          ['tsserver'] = function()
-            lspconfig.tsserver.setup {
-              root_dir = lspconfig.util.root_pattern 'package.json',
-              single_file_support = false,
-            }
-          end,
-
-          ['eslint'] = function()
-            lspconfig.eslint.setup {
-              root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
-
-              settings = {
-                format = { enable = true },
-              },
-
-              handlers = {
-                ['window/showMessageRequest'] = function(_, result)
-                  return result.message:match 'ENOENT' and vim.NIL or result
-                end,
-              },
-            }
+            require('lspconfig')[server_name].setup(server)
           end,
         },
       }

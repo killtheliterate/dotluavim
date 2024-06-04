@@ -16,10 +16,6 @@ set.writebackup = false
 vim.o.inccommand = 'nosplit'
 vim.o.completeopt = 'menuone,noselect'
 
--- copilot being a piece
--- vim.opt.encoding = 'utf-8'
--- vim.opt.fileencoding = 'utf-8'
-
 vim.g.markdown_fenced_languages = {
   'ts=typescript',
 }
