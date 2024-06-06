@@ -12,8 +12,6 @@ return {
       'yioneko/nvim-vtsls',
     },
     config = function()
-      vim.lsp.set_log_level 'debug'
-
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('killtheliterate-lsp-attach', { clear = true }),
         callback = function(event)
