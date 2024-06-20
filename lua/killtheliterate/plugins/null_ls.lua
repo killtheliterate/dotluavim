@@ -9,6 +9,7 @@ return {
 
     null_ls.setup {
       sources = {
+        -- diagnostics
         null_ls.builtins.diagnostics.codespell,
         require('none-ls.diagnostics.eslint_d').with {
           method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
@@ -19,7 +20,13 @@ return {
         null_ls.builtins.diagnostics.stylelint.with {
           filetypes = { 'scss', 'css' },
         },
-        null_ls.builtins.formatting.prettierd,
+
+        -- formatting
+        null_ls.builtins.formatting.prettierd.with {
+          condition = function(utils)
+            return utils.root_has_file { 'package.json' }
+          end,
+        },
       },
     }
   end,

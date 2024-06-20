@@ -36,7 +36,9 @@ return {
           if client and client.name == 'vtsls' then
             vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = event.buf, desc = 'vtsls: [C]ode [L]ens' })
             vim.keymap.set('n', 'gs', require('vtsls').commands.goto_source_definition, { buffer = event.buf, desc = 'vtsls: [G]oto [S]ources' })
+          end
 
+          if client then
             vim.lsp.commands['editor.action.showReferences'] = function(command, ctx)
               local locations = command.arguments[3]
 
