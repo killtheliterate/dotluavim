@@ -16,7 +16,8 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
 
-  require 'killtheliterate.plugins.base16',
+  -- require 'killtheliterate.plugins.base16',
+  require 'killtheliterate.plugins.catppuccin',
   require 'killtheliterate.plugins.cmp',
   require 'killtheliterate.plugins.copilot',
   -- require 'killtheliterate.plugins.dirvish',
