@@ -36,4 +36,6 @@ vim.diagnostic.config {
   },
 }
 
+-- vim.api.nvim_set_hl(0, 'Comment', { italic = true })
+
 -- vim: ts=2 sts=2 sw=2 et
