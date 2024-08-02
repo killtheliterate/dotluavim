@@ -1,13 +1,14 @@
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   { 'numToStr/Comment.nvim', opts = {} },
-  require 'kickstart/plugins/gitsigns',
-  require 'kickstart/plugins/which-key',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.lint',
+  -- require 'kickstart/plugins/cmp',
   require 'kickstart/plugins/conform',
-  require 'kickstart/plugins/cmp',
+  require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/todo-comments',
   require 'kickstart/plugins/treesitter',
-  require 'kickstart.plugins.autopairs',
+  require 'kickstart/plugins/which-key',
 
   require 'killtheliterate.plugins.catppuccin',
   require 'killtheliterate.plugins.cmp',
@@ -17,7 +18,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.kitty',
   require 'killtheliterate.plugins.lspconfig',
   require 'killtheliterate.plugins.mini',
-  require 'killtheliterate.plugins.null_ls',
+  -- require 'killtheliterate.plugins.null_ls',
   require 'killtheliterate.plugins.oil',
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.telescope',
