@@ -27,7 +27,7 @@ return {
     vim.keymap.set('n', '<leader>T', function()
       local action_state = require 'telescope.actions.state'
       local actions = require 'telescope.actions'
-      local colors = { 'Catppuccin-Frappe', 'Catppuccin-Latte' }
+      local colors = { 'catppuccin-frappe', 'catppuccin-latte' }
       local theme = require('telescope.themes').get_dropdown()
 
       require('telescope.pickers')
