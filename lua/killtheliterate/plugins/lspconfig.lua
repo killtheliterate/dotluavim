@@ -21,7 +21,6 @@ return {
       { 'williamboman/mason-lspconfig.nvim' },
       { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
       { 'j-hui/fidget.nvim', opts = {} },
-      { 'folke/neodev.nvim', opts = {} },
       { 'yioneko/nvim-vtsls' },
     },
     config = function()
@@ -94,7 +93,7 @@ return {
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
-        svelte = {},
+        tailwindcss = {},
         vtsls = {
           settings = {
             typescript = {
@@ -188,22 +187,6 @@ return {
               },
             }
           end,
-
-          -- ['eslint'] = function()
-          --   lspconfig.eslint.setup {
-          --     root_dir = lspconfig.util.root_pattern('.eslintrc', '.eslintrc.js', '.eslintrc.json'),
-          --
-          --     settings = {
-          --       format = false,
-          --     },
-          --
-          --     handlers = {
-          --       ['window/showMessageRequest'] = function(_, result)
-          --         return result.message:match 'ENOENT' and vim.NIL or result
-          --       end,
-          --     },
-          --   }
-          -- end,
         },
       }
     end,
