@@ -19,6 +19,7 @@ return {
       },
     },
     opts = {
+      -- log_level = vim.log.levels.DEBUG,
       notify_on_error = true,
       format_on_save = function(bufnr)
         local disable_filetypes = { c = true, cpp = true }
@@ -43,6 +44,7 @@ return {
       },
 
       formatters_by_ft = {
+        css = { 'stylelint' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
