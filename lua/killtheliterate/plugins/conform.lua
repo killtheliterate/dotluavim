@@ -51,6 +51,7 @@ return {
         python = { 'isort', 'black' },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        yaml = { 'prettierd', 'prettier', 'yamlfmt', stop_after_first = true },
       },
     },
   },
