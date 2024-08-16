@@ -1,3 +1,8 @@
+local function has_deno_json()
+  local deno_json_path = vim.fn.getcwd() .. '/deno.json'
+  return vim.fn.filereadable(deno_json_path) == 1
+end
+
 return {
   {
     'mfussenegger/nvim-lint',
@@ -6,11 +11,17 @@ return {
       local lint = require 'lint'
 
       lint.linters_by_ft = lint.linters_by_ft or {}
+      lint.linters_by_ft['html'] = { 'htmlhint' }
       lint.linters_by_ft['javascript'] = { 'eslint_d' }
       lint.linters_by_ft['javascriptreact'] = { 'eslint_d' }
+      lint.linters_by_ft['python'] = { 'pylint' }
       lint.linters_by_ft['typescript'] = { 'eslint_d' }
       lint.linters_by_ft['typescriptreact'] = { 'eslint_d' }
-      lint.linters_by_ft['python'] = { 'pylint' }
+
+      -- Disable linters if it's a deno project
+      if has_deno_json() then
+        lint.linters_by_ft = {}
+      end
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 
