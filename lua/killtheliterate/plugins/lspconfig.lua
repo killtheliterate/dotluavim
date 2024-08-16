@@ -127,6 +127,7 @@ return {
       vim.list_extend(ensure_installed, {
         'codespell',
         'eslint_d',
+        'htmlhint',
         'prettierd',
         'stylua',
       })
