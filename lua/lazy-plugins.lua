@@ -10,7 +10,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.catppuccin',
   require 'killtheliterate.plugins.cmp',
   require 'killtheliterate.plugins.conform',
-  require 'killtheliterate.plugins.copilot',
+  -- require 'killtheliterate.plugins.copilot',
   require 'killtheliterate.plugins.flash',
   require 'killtheliterate.plugins.indent_line',
   require 'killtheliterate.plugins.kitty',

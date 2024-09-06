@@ -86,14 +86,38 @@ return {
       local servers = {
         bashls = {},
         denols = {},
-        elixirls = {},
+        elixirls = {
+          settings = {
+            elixrLS = {
+              dialyzerEnabled = true,
+              fetchDeps = false,
+              mixEnv = 'test',
+              signatureAfterComplete = false,
+              suggestSpecs = false,
+              useLspFormatting = true,
+            },
+          },
+        },
         -- @TODO: eslint-lsp is sloooooooow
         -- eslint = {},
         html = {},
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
-        tailwindcss = {},
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              includeLanguages = {
+                elixir = 'html-eex',
+                eelixir = 'html-eex',
+                heex = 'html-eex',
+              },
+              -- experimental = {
+              --   configFile = './assets/tailwind.config.js',
+              -- },
+            },
+          },
+        },
         vtsls = {
           settings = {
             typescript = {
@@ -125,6 +149,7 @@ return {
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'biome',
         'codespell',
         'eslint_d',
         'htmlhint',
