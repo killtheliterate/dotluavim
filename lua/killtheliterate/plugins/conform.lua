@@ -3,6 +3,12 @@ local function has_deno_json()
   return vim.fn.filereadable(deno_json_path) == 1
 end
 
+function print_table(tbl)
+  for k, v in pairs(tbl) do
+    print(k, v)
+  end
+end
+
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -32,6 +38,12 @@ return {
       formatters = {
         prettier = {
           condition = function()
+            local filetype = vim.bo.filetype
+
+            if filetype == 'css' then
+              return true
+            end
+
             return not has_deno_json()
           end,
         },
@@ -44,7 +56,7 @@ return {
       },
 
       formatters_by_ft = {
-        css = { 'stylelint' },
+        css = { 'stylelint', 'prettier' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
