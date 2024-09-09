@@ -22,6 +22,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.telescope',
   require 'killtheliterate.plugins.trouble',
+  require 'killtheliterate.plugins.various-textobjs',
 
   'myusuf3/numbers.vim',
   'tpope/vim-eunuch',
