@@ -12,6 +12,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.conform',
   require 'killtheliterate.plugins.copilot',
   require 'killtheliterate.plugins.flash',
+  require 'killtheliterate.plugins.harpoon',
   require 'killtheliterate.plugins.indent_line',
   require 'killtheliterate.plugins.kitty',
   require 'killtheliterate.plugins.lint',

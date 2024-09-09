@@ -1,7 +1,4 @@
-local function has_deno_json()
-  local deno_json_path = vim.fn.getcwd() .. '/deno.json'
-  return vim.fn.filereadable(deno_json_path) == 1
-end
+local helpers = require 'killtheliterate.helpers'
 
 return {
   { -- Autoformat
@@ -32,19 +29,27 @@ return {
       formatters = {
         prettier = {
           condition = function()
-            return not has_deno_json()
+            if helpers.is_css_file() then
+              return true
+            end
+
+            return not helpers.has_deno_json()
           end,
         },
 
         prettierd = {
           condition = function()
-            return not has_deno_json()
+            if helpers.is_css_file() then
+              return true
+            end
+
+            return not helpers.has_deno_json()
           end,
         },
       },
 
       formatters_by_ft = {
-        css = { 'stylelint' },
+        css = { 'prettier' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
