@@ -90,4 +90,8 @@ function M.print_table(tbl)
   end
 end
 
+function M.map(keys, func, desc)
+  vim.keymap.set('n', keys, func, { desc = desc })
+end
+
 return M

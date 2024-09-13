@@ -151,6 +151,7 @@ return {
         'codespell',
         'eslint_d',
         'htmlhint',
+        'jsonlint',
         'prettierd',
         'stylua',
       })

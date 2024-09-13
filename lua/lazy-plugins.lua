@@ -5,7 +5,6 @@ require('lazy').setup({
   require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/todo-comments',
   require 'kickstart/plugins/treesitter',
-  require 'kickstart/plugins/which-key',
 
   require 'killtheliterate.plugins.catppuccin',
   require 'killtheliterate.plugins.cmp',
@@ -17,12 +16,14 @@ require('lazy').setup({
   require 'killtheliterate.plugins.kitty',
   require 'killtheliterate.plugins.lint',
   require 'killtheliterate.plugins.lspconfig',
+  require 'killtheliterate.plugins.marks',
   require 'killtheliterate.plugins.mini',
   require 'killtheliterate.plugins.oil',
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.telescope',
   require 'killtheliterate.plugins.trouble',
   require 'killtheliterate.plugins.various-textobjs',
+  require 'killtheliterate.plugins.which-key',
 
   'myusuf3/numbers.vim',
   'tpope/vim-eunuch',
