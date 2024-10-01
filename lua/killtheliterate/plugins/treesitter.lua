@@ -17,6 +17,7 @@ return {
         'elixir',
         'heex',
         'html',
+        'liquid',
         'javascript',
         'json',
         'lua',

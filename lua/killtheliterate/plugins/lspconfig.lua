@@ -96,8 +96,6 @@ return {
             },
           },
         },
-        -- @TODO: eslint-lsp is sloooooooow
-        -- eslint = {},
         html = {},
         jsonls = {},
         pyright = {},

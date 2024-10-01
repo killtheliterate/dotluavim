@@ -19,5 +19,9 @@ return {
       '~/repos/openmat-be',
       '~/repos/redux-saga-try-catch',
     }
+
+    vim.g.copilot_filetypes = {
+      markdown = false,
+    }
   end,
 }

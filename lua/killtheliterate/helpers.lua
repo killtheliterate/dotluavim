@@ -26,7 +26,6 @@ function M.has_eslintrc()
     '.eslintrc.yml',
     '.eslintrc',
     'eslint.config.js',
-    'package.json',
   }
 
   for _, file in ipairs(allowed_rc_file_names) do
@@ -47,7 +46,6 @@ function M.has_stylelintrc()
     '.stylelintrc.json',
     '.stylelintrc.yaml',
     '.stylelintrc.yml',
-    'package.json',
   }
 
   for _, file in ipairs(allowed_rc_file_names) do
