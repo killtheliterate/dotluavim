@@ -27,6 +27,10 @@ return {
       end,
 
       formatters = {
+        djlint = {
+          command = 'djlint',
+          args = { '-', '--reformat', '--indent', 2, '--preserve-blank-lines' },
+        },
         prettier = {
           condition = function()
             if helpers.is_css_file() then
@@ -52,6 +56,7 @@ return {
         css = { 'prettier' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        jinja = { 'djlint' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },

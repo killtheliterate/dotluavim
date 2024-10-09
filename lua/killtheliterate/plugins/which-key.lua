@@ -15,6 +15,7 @@ return {
         { '<leader>t', group = '[T]oggle' },
         { '<leader>u', group = '[U]nit Test' },
         { '<leader>w', group = '[W]orkspace' },
+        { '<leader>G', group = '[G]it' },
       }
     end,
   },

@@ -9,7 +9,13 @@ return {
 
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft['html'] = { 'htmlhint' }
+      lint.linters_by_ft['jinja.html'] = { 'djlint' }
+      lint.linters_by_ft['json'] = { 'jsonlint' }
       lint.linters_by_ft['python'] = { 'pylint' }
+
+      lint.linters_by_ft['markdown'] = nil
+      -- https://github.com/mfussenegger/nvim-lint/issues/528#issuecomment-2008187144
+      -- lint.linters_by_ft['markdown'] = { 'vale' }
 
       if helpers.has_eslintrc() then
         lint.linters_by_ft['javascript'] = { 'eslint_d' }
