@@ -23,5 +23,9 @@ return {
     vim.g.copilot_filetypes = {
       markdown = false,
     }
+
+    -- only runs in single-file mode
+    -- @see https://stackoverflow.com/questions/77482352/github-copilot-running-in-single-file-mode
+    -- @see https://github.com/github/copilot.vim/blob/release/lua/_copilot.lua#L12
   end,
 }

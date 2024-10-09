@@ -84,22 +84,25 @@ return {
       local servers = {
         bashls = {},
         denols = {},
-        elixirls = {
-          settings = {
-            elixrLS = {
-              dialyzerEnabled = true,
-              fetchDeps = false,
-              mixEnv = 'test',
-              signatureAfterComplete = false,
-              suggestSpecs = false,
-              useLspFormatting = true,
-            },
-          },
-        },
         html = {},
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
+        -- vale_ls = {},
+
+        elixirls = {
+          settings = {
+            elixrLS = {
+              -- dialyzerEnabled = true,
+              -- fetchDeps = false,
+              mixEnv = 'test',
+              -- signatureAfterComplete = false,
+              -- suggestSpecs = false,
+              useLspFormatting = true,
+            },
+          },
+        },
+
         tailwindcss = {
           settings = {
             tailwindCSS = {
@@ -114,6 +117,7 @@ return {
             },
           },
         },
+
         vtsls = {
           settings = {
             typescript = {
@@ -145,13 +149,16 @@ return {
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'biome',
+        -- 'biome',
         'codespell',
+        'djlint',
         'eslint_d',
+        'hadolint',
         'htmlhint',
         'jsonlint',
         'prettierd',
         'stylua',
+        -- 'vale', -- @see killtheliterate/plugins/lint.lua
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

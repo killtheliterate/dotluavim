@@ -12,7 +12,6 @@ return {
     map('<leader>ug', ':TestVisit<CR>', 'Visit file for last run test')
 
     vim.g['test#strategy'] = {
-      -- nearest = 'basic',
       nearest = 'neovim',
     }
   end,

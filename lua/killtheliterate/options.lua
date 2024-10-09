@@ -20,4 +20,6 @@ vim.g.markdown_fenced_languages = {
   'ts=typescript',
 }
 
+vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
+
 -- vim: ts=2 sts=2 sw=2 et
