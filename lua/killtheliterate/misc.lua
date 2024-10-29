@@ -61,6 +61,14 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   end,
 })
 
--- vim.api.nvim_set_hl(0, 'Comment', { italic = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = 'en' -- You can set other languages if needed
+  end,
+})
+
+vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 
 -- vim: ts=2 sts=2 sw=2 et
