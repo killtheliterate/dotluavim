@@ -16,6 +16,7 @@ return {
         { '<leader>u', group = '[U]nit Test' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>G', group = '[G]it' },
+        { '<leader>F', group = '[F]ormatter' },
       }
     end,
   },

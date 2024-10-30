@@ -14,6 +14,22 @@ return {
         mode = '',
         desc = '[F]ormat buffer',
       },
+      {
+        '<leader>Fe',
+        function()
+          require('conform').setup { enabled = false }
+        end,
+        mode = '',
+        desc = '[F]ormatter [e]nabled',
+      },
+      {
+        '<leader>Fd',
+        function()
+          require('conform').setup { enabled = true }
+        end,
+        mode = '',
+        desc = '[F]ormatter [d]isabled',
+      },
     },
     opts = {
       -- log_level = vim.log.levels.DEBUG,
