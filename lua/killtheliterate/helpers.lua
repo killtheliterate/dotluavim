@@ -20,12 +20,13 @@ end
 
 function M.has_eslintrc()
   local allowed_rc_file_names = {
+    '.eslintrc',
     '.eslintrc.js',
     '.eslintrc.json',
     '.eslintrc.yaml',
     '.eslintrc.yml',
-    '.eslintrc',
     'eslint.config.js',
+    'eslint.config.mjs',
   }
 
   for _, file in ipairs(allowed_rc_file_names) do
@@ -40,12 +41,13 @@ end
 
 function M.has_stylelintrc()
   local allowed_rc_file_names = {
-    'stylelint.config.js',
-    'stylelint.config.cjs',
     '.stylelintrc',
     '.stylelintrc.json',
     '.stylelintrc.yaml',
     '.stylelintrc.yml',
+    'stylelint.config.cjs',
+    'stylelint.config.js',
+    'stylelint.config.mjs',
   }
 
   for _, file in ipairs(allowed_rc_file_names) do
@@ -61,15 +63,16 @@ end
 function M.has_prettierrc()
   local allowed_rc_file_names = {
     '.prettierrc',
+    '.prettierrc.cjs',
+    '.prettierrc.js',
     '.prettierrc.json',
+    '.prettierrc.toml',
     '.prettierrc.yaml',
     '.prettierrc.yml',
-    '.prettierrc.js',
-    '.prettierrc.cjs',
-    'prettier.config.js',
-    'prettier.config.cjs',
-    '.prettierrc.toml',
     'package.json',
+    'prettier.config.cjs',
+    'prettier.config.js',
+    'prettier.config.mjs',
   }
 
   for _, file in ipairs(allowed_rc_file_names) do

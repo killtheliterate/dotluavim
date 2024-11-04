@@ -69,6 +69,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.api.nvim_set_hl(0, 'Comment', { italic = true })
+-- vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 
 -- vim: ts=2 sts=2 sw=2 et
