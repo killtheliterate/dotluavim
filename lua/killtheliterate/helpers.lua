@@ -25,6 +25,7 @@ function M.has_eslintrc()
     '.eslintrc.json',
     '.eslintrc.yaml',
     '.eslintrc.yml',
+    'eslint.config.cjs',
     'eslint.config.js',
     'eslint.config.mjs',
   }
