@@ -6,6 +6,7 @@ require('lazy').setup({
   require 'kickstart/plugins/todo-comments',
   require 'kickstart/plugins/treesitter',
 
+  require 'killtheliterate.plugins.bigfile',
   require 'killtheliterate.plugins.catppuccin',
   require 'killtheliterate.plugins.cmp',
   require 'killtheliterate.plugins.conform',
