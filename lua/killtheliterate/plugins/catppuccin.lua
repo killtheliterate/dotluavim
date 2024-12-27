@@ -13,12 +13,12 @@ return {
     }
 
     local function set_colorscheme(file, name)
+      local Job = require 'plenary.job'
+
       vim.fn.writefile({ name }, file)
       vim.cmd('colorscheme ' .. name)
 
-      vim.loop.spawn('kitten', {
-        args = { 'themes', '--reload-in=all', name },
-      }, nil)
+      Job:new({ command = 'kitten', args = { 'themes', '--reload-in=all', name } }):sync()
     end
 
     local nvim_theme_file = vim.fn.expand '~/.config/nvim/current-theme'

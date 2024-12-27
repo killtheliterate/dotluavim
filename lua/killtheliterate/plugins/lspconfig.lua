@@ -156,6 +156,7 @@ return {
         'hadolint',
         'htmlhint',
         'jsonlint',
+        'actionlint',
         'prettierd',
         'stylua',
         -- 'vale', -- @see killtheliterate/plugins/lint.lua
