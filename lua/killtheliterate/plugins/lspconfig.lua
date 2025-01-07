@@ -84,6 +84,7 @@ return {
       local servers = {
         bashls = {},
         denols = {},
+        nil_ls = {},
         html = {},
         jsonls = {},
         pyright = {},
@@ -150,13 +151,13 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         -- 'biome',
+        'actionlint',
         'codespell',
         'djlint',
         'eslint_d',
         'hadolint',
         'htmlhint',
         'jsonlint',
-        'actionlint',
         'prettierd',
         'stylua',
         -- 'vale', -- @see killtheliterate/plugins/lint.lua
