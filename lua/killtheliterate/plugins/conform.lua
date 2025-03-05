@@ -70,11 +70,13 @@ return {
 
       formatters_by_ft = {
         css = { 'prettier' },
+        -- html = { 'prettier', stop_after_first = true },
         javascript = { 'prettier', stop_after_first = true },
         javascriptreact = { 'prettier', stop_after_first = true },
         jinja = { 'djlint' },
         lua = { 'stylua' },
         python = { 'isort', 'black' },
+        svg = { 'xmlformatter', stop_after_first = true },
         typescript = { 'prettier', stop_after_first = true },
         typescriptreact = { 'prettier', stop_after_first = true },
         yaml = { 'prettier', 'yamlfmt', stop_after_first = true },

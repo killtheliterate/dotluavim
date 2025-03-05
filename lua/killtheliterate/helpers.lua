@@ -13,9 +13,20 @@ function M.has_deno_json()
   return vim.fn.filereadable(json_path) == 1
 end
 
-function M.has_package_json()
-  local json_path = vim.fn.getcwd() .. '/package.json'
-  return vim.fn.filereadable(json_path) == 1
+function M.has_vitest()
+  local allowed_rc_file_names = {
+    'vitest.config.ts',
+    'vite.config.ts',
+  }
+
+  for _, file in ipairs(allowed_rc_file_names) do
+    local path = vim.fn.getcwd() .. '/' .. file
+    if vim.fn.filereadable(path) == 1 then
+      return true
+    end
+  end
+
+  return nil
 end
 
 function M.has_eslintrc()

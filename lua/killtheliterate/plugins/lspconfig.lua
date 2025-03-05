@@ -86,6 +86,7 @@ return {
         denols = {},
         nil_ls = {},
         html = {},
+        gopls = {},
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
@@ -160,6 +161,7 @@ return {
         'jsonlint',
         'prettierd',
         'stylua',
+        'xmlformatter',
         -- 'vale', -- @see killtheliterate/plugins/lint.lua
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
