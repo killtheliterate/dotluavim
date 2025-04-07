@@ -22,6 +22,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.mini',
   require 'killtheliterate.plugins.neogit',
   require 'killtheliterate.plugins.oil',
+  -- require 'killtheliterate.plugins.rainbow',
   require 'killtheliterate.plugins.reveal',
   require 'killtheliterate.plugins.telescope',
   require 'killtheliterate.plugins.test',
