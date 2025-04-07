@@ -84,7 +84,7 @@ return {
       local servers = {
         bashls = {},
         denols = {},
-        nil_ls = {},
+        -- nil_ls = {},
         html = {},
         gopls = {},
         jsonls = {},
@@ -153,6 +153,7 @@ return {
       vim.list_extend(ensure_installed, {
         -- 'biome',
         'actionlint',
+        'yamlls',
         'codespell',
         'djlint',
         'eslint_d',

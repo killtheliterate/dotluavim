@@ -6,7 +6,19 @@ vim.api.nvim_create_user_command('OpenInVSCode', function()
   local filepath = vim.fn.expand '%:p' -- ':p' expands to full path
 
   os.execute('code ' .. filepath)
-end, { desc = 'Open the current file in Visual Studio Code' })
+end, { desc = 'Open the current file in VSCode' })
+
+vim.api.nvim_create_user_command('OpenInCursor', function()
+  local filepath = vim.fn.expand '%:p' -- ':p' expands to full path
+
+  os.execute('cursor ' .. filepath)
+end, { desc = 'Open the current file in Cursor' })
+
+vim.api.nvim_create_user_command('OpenInWindsurf', function()
+  local filepath = vim.fn.expand '%:p' -- ':p' expands to full path
+
+  os.execute('windsurf ' .. filepath)
+end, { desc = 'Open the current file in Cursor' })
 
 vim.diagnostic.config {
   severity_sort = true,

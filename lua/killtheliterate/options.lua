@@ -12,6 +12,7 @@ set.tabstop = 2
 set.textwidth = 80
 set.wrap = false
 set.writebackup = false
+set.listchars = { tab = '· ', trail = '·', nbsp = '␣' }
 
 vim.o.inccommand = 'nosplit'
 vim.o.completeopt = 'menuone,noselect'

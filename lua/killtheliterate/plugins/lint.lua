@@ -11,8 +11,8 @@ return {
       lint.linters_by_ft['html'] = { 'htmlhint' }
       lint.linters_by_ft['jinja.html'] = { 'djlint' }
       lint.linters_by_ft['json'] = { 'jsonlint' }
+      lint.linters_by_ft['proto'] = { 'buf_lint' }
       lint.linters_by_ft['python'] = { 'pylint' }
-      lint.linters_by_ft['yaml'] = { 'actionlint' }
 
       lint.linters_by_ft['markdown'] = nil
       -- https://github.com/mfussenegger/nvim-lint/issues/528#issuecomment-2008187144
