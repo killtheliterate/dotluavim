@@ -7,11 +7,11 @@ return {
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
       },
     },
   },
-  { 'Bilal2453/luvit-meta', lazy = true },
+  -- { 'Bilal2453/luvit-meta', lazy = true },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -20,6 +20,7 @@ return {
       { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
       { 'j-hui/fidget.nvim', opts = {} },
       { 'yioneko/nvim-vtsls' },
+      { 'saghen/blink.cmp' },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -78,8 +79,7 @@ return {
         end,
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       local servers = {
         bashls = {},
@@ -169,6 +169,9 @@ return {
 
       local lspconfig = require 'lspconfig'
       require('mason-lspconfig').setup {
+        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        automatic_enable = true,
+        automatic_installation = false,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
