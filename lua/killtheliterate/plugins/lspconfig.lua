@@ -14,7 +14,7 @@ return {
   -- { 'Bilal2453/luvit-meta', lazy = true },
   {
     'neovim/nvim-lspconfig',
-    commit = '85e0dd26b710e834a105d679200d01e326a3d2b0',
+    -- commit = '85e0dd26b710e834a105d679200d01e326a3d2b0',
     dependencies = {
       { 'williamboman/mason.nvim', config = true, commit = 'fc98833b6da5de5a9c5b1446ac541577059555be' },
       { 'williamboman/mason-lspconfig.nvim', commit = '1a31f824b9cd5bc6f342fc29e9a53b60d74af245' },
