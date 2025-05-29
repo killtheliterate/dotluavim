@@ -81,4 +81,27 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- vim: ts=2 sts=2 sw=2 et
+-- Turn off spell in floating windows
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  callback = function()
+    if vim.api.nvim_win_get_config(0).relative ~= '' then
+      vim.wo.spell = false
+    end
+  end,
+})
+
+if not vim.lsp._open_floating_preview_patched then
+  local orig = vim.lsp.util.open_floating_preview
+
+  rawset(vim.lsp.util, 'open_floating_preview', function(contents, syntax, opts)
+    opts = opts or {}
+    opts.wrap = true
+    local bufnr, winid = orig(contents, syntax, opts)
+    if winid then
+      vim.wo[winid].spell = false
+    end
+    return bufnr, winid
+  end)
+
+  vim.lsp._open_floating_preview_patched = true
+end
