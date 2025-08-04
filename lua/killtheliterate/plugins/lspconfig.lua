@@ -51,7 +51,7 @@ return {
 
           -- Handle denols and vtsls conflicts
           if client then
-            local helpers = require('killtheliterate.helpers')
+            local helpers = require 'killtheliterate.helpers'
             if client.name == 'denols' and helpers.has_package_json() then
               vim.lsp.stop_client(client.id)
             elseif client.name == 'vtsls' and helpers.has_deno_json() and not helpers.has_package_json() then
@@ -94,13 +94,15 @@ return {
 
       local servers = {
         bashls = {},
+        buf_ls = {},
         denols = {},
-        html = {},
         gopls = {},
+        html = {},
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
         vtsls = {},
+
         lua_ls = {
           settings = {
             Lua = {
