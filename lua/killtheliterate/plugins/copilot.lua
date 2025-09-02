@@ -18,11 +18,20 @@ return {
       '~/repos/dog-nose',
       '~/repos/openmat-be',
       '~/repos/redux-saga-try-catch',
+      '~/repos/quell-ui',
     }
 
     vim.g.copilot_filetypes = {
       markdown = false,
     }
+
+    local cp = require('catppuccin.palettes').get_palette()
+
+    -- Make Copilot ghost text more visible
+    vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
+      fg = cp.mauve, -- or cp.sky / cp.mauve / cp.teal
+      italic = true,
+    })
 
     -- only runs in single-file mode
     -- @see https://stackoverflow.com/questions/77482352/github-copilot-running-in-single-file-mode

@@ -14,7 +14,7 @@ require('lazy').setup({
   -- require 'killtheliterate.plugins.nvim-colorizer',
   -- require 'killtheliterate.plugins.oklch-color-picker',
   require 'killtheliterate.plugins.conform',
-  require 'killtheliterate.plugins.copilot',
+  -- require 'killtheliterate.plugins.copilot',
   require 'killtheliterate.plugins.flash',
   -- require 'killtheliterate.plugins.freq',
   require 'killtheliterate.plugins.harpoon',
