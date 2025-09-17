@@ -95,7 +95,7 @@ return {
       local servers = {
         bashls = {},
         buf_ls = {},
-        denols = {},
+        -- denols = {},
         gopls = {},
         html = {},
         jsonls = {},
