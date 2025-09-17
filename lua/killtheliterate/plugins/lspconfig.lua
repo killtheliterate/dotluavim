@@ -16,8 +16,8 @@ return {
     'neovim/nvim-lspconfig',
     -- commit = '85e0dd26b710e834a105d679200d01e326a3d2b0',
     dependencies = {
-      { 'williamboman/mason.nvim', config = true, commit = 'fc98833b6da5de5a9c5b1446ac541577059555be' },
-      { 'williamboman/mason-lspconfig.nvim', commit = '1a31f824b9cd5bc6f342fc29e9a53b60d74af245' },
+      { 'mason-org/mason.nvim', opts = {} },
+      { 'mason-org/mason-lspconfig.nvim', opts = {} },
       { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
       { 'j-hui/fidget.nvim', opts = {} },
       { 'yioneko/nvim-vtsls' },
@@ -47,6 +47,16 @@ return {
           if client and client.name == 'vtsls' then
             vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { buffer = event.buf, desc = 'vtsls: [C]ode [L]ens' })
             vim.keymap.set('n', 'gs', require('vtsls').commands.goto_source_definition, { buffer = event.buf, desc = 'vtsls: [G]oto [S]ources' })
+          end
+
+          -- Handle denols and vtsls conflicts
+          if client then
+            local helpers = require 'killtheliterate.helpers'
+            if client.name == 'denols' and helpers.has_package_json() then
+              vim.lsp.stop_client(client.id)
+            elseif client.name == 'vtsls' and helpers.has_deno_json() and not helpers.has_package_json() then
+              vim.lsp.stop_client(client.id)
+            end
           end
 
           if client and client.server_capabilities.documentHighlightProvider then
@@ -84,57 +94,14 @@ return {
 
       local servers = {
         bashls = {},
-        denols = {},
-        -- nil_ls = {},
-        html = {},
+        buf_ls = {},
+        -- denols = {},
         gopls = {},
+        html = {},
         jsonls = {},
         pyright = {},
         rust_analyzer = {},
-        -- vale_ls = {},
-
-        elixirls = {
-          settings = {
-            elixrLS = {
-              -- dialyzerEnabled = true,
-              -- fetchDeps = false,
-              mixEnv = 'test',
-              -- signatureAfterComplete = false,
-              -- suggestSpecs = false,
-              useLspFormatting = true,
-            },
-          },
-        },
-
-        tailwindcss = {
-          settings = {
-            tailwindCSS = {
-              includeLanguages = {
-                elixir = 'html-eex',
-                eelixir = 'html-eex',
-                heex = 'html-eex',
-              },
-              -- experimental = {
-              --   configFile = './assets/tailwind.config.js',
-              -- },
-            },
-          },
-        },
-
-        vtsls = {
-          settings = {
-            typescript = {
-              inlayHints = {
-                parameterNames = { enabled = 'literals' },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                enumMemberValues = { enabled = true },
-              },
-            },
-          },
-        },
+        vtsls = {},
 
         lua_ls = {
           settings = {
@@ -176,55 +143,8 @@ return {
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
-
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-
             lspconfig[server_name].setup(server)
-          end,
-
-          ['denols'] = function()
-            lspconfig.denols.setup {
-              root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc'),
-
-              init_options = {
-                lint = true,
-                unstable = false,
-              },
-            }
-          end,
-
-          ['vtsls'] = function()
-            local original_handler = vim.lsp.handlers['textDocument/definition']
-
-            local first_definition_handler = function(err, result, ctx, config)
-              if result and vim.islist(result) and #result > 1 then
-                original_handler(err, { result[1] }, ctx, config)
-              else
-                original_handler(err, result, ctx, config)
-              end
-            end
-
-            lspconfig.vtsls.setup {
-              root_dir = lspconfig.util.root_pattern 'package.json',
-
-              single_file_support = false,
-
-              init_options = {
-                vtsls = {
-                  addMissingImports = true,
-                },
-              },
-
-              -- @TODO: overrides do not work
-              -- @see: https://www.reddit.com/r/neovim/comments/15vxpss/specific_configuration_for_a_language_server
-              -- @see: https://www.reddit.com/r/neovim/comments/1agwrqa/how_to_extend_masons_automatic_server
-              -- @see: https://www.reddit.com/r/neovim/comments/1co6g92/how_to_connect_csharpls_extended_in_lazy
-              -- @see: https://www.reddit.com/r/neovim/comments/1b75th3/comment/ktgns2i
-              -- @see: https://github.com/typescript-language-server/typescript-language-server/issues/216
-              handlers = {
-                ['textDocument/definition'] = first_definition_handler,
-              },
-            }
           end,
         },
       }
