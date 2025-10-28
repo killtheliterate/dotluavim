@@ -148,6 +148,10 @@ return {
           end,
         },
       }
+
+      -- Setup Gleam LSP (not managed by Mason, comes with Gleam binary)
+      -- Using vim.lsp.enable for Neovim 0.11+ (new API)
+      vim.lsp.enable('gleam')
     end,
   },
 }
