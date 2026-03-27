@@ -9,6 +9,7 @@ require('lazy').setup({
   require 'killtheliterate.plugins.bigfile',
   -- require 'killtheliterate.plugins.bookmarks',
   require 'killtheliterate.plugins.catppuccin',
+  require 'killtheliterate.plugins.claudecode',
   require 'killtheliterate.plugins.cmp',
   require 'killtheliterate.plugins.nvim-highlight-colors',
   -- require 'killtheliterate.plugins.nvim-colorizer',
