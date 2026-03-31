@@ -3,7 +3,7 @@ return {
   event = 'VeryLazy', -- or "BufReadPre" if you want it sooner
   config = function()
     require('nvim-highlight-colors').setup {
-      render = 'virtual', -- options: "background", "foreground", "virtual"
+      render = 'foreground', -- options: "background", "foreground", "virtual"
 
       virtual_symbol = '●',
 
