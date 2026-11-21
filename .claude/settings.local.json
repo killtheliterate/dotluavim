@@ -4,7 +4,8 @@
       "Bash(gh pr:*)",
       "Bash(gh issue:*)",
       "Bash(gh api:*)",
-      "Read(//Users/gg/.local/share/nvim/lazy/nvim-treesitter/.git/**)"
+      "Read(//Users/gg/.local/share/nvim/lazy/nvim-treesitter/.git/**)",
+      "WebSearch"
     ]
   }
 }

@@ -35,8 +35,10 @@ require('lazy').setup({
   require 'killtheliterate.plugins.test',
   require 'killtheliterate.plugins.treesitter',
   require 'killtheliterate.plugins.trouble',
+  require 'killtheliterate.plugins.twilight',
   require 'killtheliterate.plugins.various-textobjs',
   require 'killtheliterate.plugins.which-key',
+  require 'killtheliterate.plugins.zen',
 
   'myusuf3/numbers.vim',
   'tpope/vim-eunuch',
